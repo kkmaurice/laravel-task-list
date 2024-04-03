@@ -24,7 +24,9 @@ Route::get('/', function () {
 
 Route::get('/tasks', function () {
     return view('index', [
-        'tasks'=> Task::latest()->get(),
+        //'tasks'=> Task::latest()->get(),
+        //apply pagination
+        'tasks'=> Task::latest()->paginate(10),
     ]);
 })->name('tasks.index');
 
@@ -56,6 +58,13 @@ Route::put('/tasks/{task}', function(Task $task, TaskRequest $request) {
 
   return redirect()->route('tasks.show', ['task' => $task->id])->with('success','Task updated successfully!👍😁👌');
 })->name('tasks.update');
+
+
+// delete route
+Route::delete('', function(Task $task, ) {
+  $task->delete();
+  return redirect()->route('tasks.index', ['task'=> $task->id])->with('success','Task deleted successfully');
+})->name('tasks.destroy');
 
 
 // Route::get('/xxx', fn() => "hello world home of survival")->name("home");
