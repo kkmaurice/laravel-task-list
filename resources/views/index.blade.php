@@ -6,6 +6,12 @@
 
 
 @section('content')
+
+<div>
+    <a href="{{ route('tasks.create') }}">Add Task</a>
+</div>
+
+
 @if(count($tasks) > 0)
     @foreach ($tasks as $task)
      <div>
